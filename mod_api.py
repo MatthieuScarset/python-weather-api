@@ -14,15 +14,22 @@ class WeatherAPI:
     self.key = API_KEY
   
   def prepareQuery(self, country, state, city):
-    self.conditions = {
-      'country': country,
-      'state': state,
-      'city': city
-    }
-    for k,v in self.conditions.items():
-      if not v:
-        raise QueryMissingParametersError(k)
-        # @todo get current location
+    # All keys required.
+    #for k,v in self.conditions.items():
+    #  if not v:
+    #    raise QueryMissingParametersError(k)
+    # 
+    # Only Country and City are required.
+    if not country:
+      raise QueryMissingParametersError('city')
+    elif not city:
+      raise QueryMissingParametersError('city')
+    else:
+      self.conditions = {
+        'country': country,
+        'state': state,
+        'city': city
+      }
   
   def buildUrl(self):
     self.url = self.protocol + self.url + self.path + self.key + "/conditions/q/" + '/'.join(self.conditions.values()) + ".json"
