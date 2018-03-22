@@ -25,7 +25,7 @@ class WeatherAPI:
         # @todo get current location
   
   def buildUrl(self):
-    self.url = self.protocol + self.url + self.path + self.key + "/conditions/q/" + '/'.join(self.conditions) + ".json"
+    self.url = self.protocol + self.url + self.path + self.key + "/conditions/q/" + '/'.join(self.conditions.values()) + ".json"
     return self.url
 
   def query(self, country = '', state = '', city = ''):

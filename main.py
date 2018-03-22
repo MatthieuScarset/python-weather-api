@@ -20,6 +20,9 @@ def main():
     print("country: " + country)
     print("state: " + state)
     print("city: " + city)
+    print("")
+    print("You can see the results online here: ")
+    print(_api.url)
 
 if __name__ == "__main__":
   main()
