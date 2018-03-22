@@ -11,17 +11,15 @@ def main():
   # city = str(input("What city? ")).replace(" ", "+")
   try:
     _api = WeatherAPI(API_KEY)
-    _raw = _api.query(country, state, city)
-    try:
-      _data = _raw['response']['results']
-    except KeyError as e:
-      print("No results for your search. Try something else.")
-    else:
-      _api.save(_data)
+    _api.query(country, state, city)
+    _api.save()
   except Exception as e:
     print("Error on query: " + str(e))
   finally:
-    print('Done')
+    print("Your data has been saved in 'data.json' for this search: ")
+    print("country: " + country)
+    print("state: " + state)
+    print("city: " + city)
 
 if __name__ == "__main__":
   main()
