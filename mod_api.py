@@ -20,7 +20,8 @@ class WeatherAPI:
         raise QueryMissingParametersError(k)
       else:
         _conditions.append(v)
-    return self.protocol + self.url + self.path + self.key + "/conditions/q/" + '/'.join(_conditions) + ".json"
+    self.url = self.protocol + self.url + self.path + self.key + "/conditions/q/" + '/'.join(_conditions) + ".json"
+    return self.url
 
   def query(self, country, state, city):
     self.conditions = {
