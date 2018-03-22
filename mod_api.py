@@ -45,13 +45,18 @@ class WeatherAPI:
     return self.data
 
   def save(self, filename = 'data.json'):
+    self.results = None
     try:
-      _results = self.data['response']['results']
-    except KeyError as e:
-      print("No results for your search. Try something else.")
-    else:
+      self.results = self.data['results']
+    except KeyError:
+      try:
+        self.results = self.data['current_observation']
+      except KeyError:
+        print("No results for your search. Try something else.")
+
+    if self.results:
       f = open('data.json', 'w')
-      json.dump(_results, f, indent=2)
+      json.dump(self.results, f, indent=2)
 
   def call(self):
     if not self.url:
